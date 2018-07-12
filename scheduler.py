@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
 from multiprocessing import Process
 from web_service import app
-from getter import Getter
+from crawler import Crawler
 from tester import Tester
-from setting import TESTER_CYCLE,GETTER_CYCLE,TESTER_ENABLED,GETTER_ENABLED,API_ENABLED,API_HOST,API_PORT
+from setting import TESTER_CYCLE,GETTER_CYCLE,TESTER_ENABLED,GETTER_ENABLED,API_ENABLED,API_HOST,API_PORT,XUN_DAI_LI_API
 import time
 
 class Scheduler():
@@ -15,11 +15,15 @@ class Scheduler():
             time.sleep(cycle)
 
     def schedule_getter(self,cycle=GETTER_CYCLE):
-        getter=Getter()
+        getter=Crawler()
         while True:
-            print("开始抓取代理")
-            getter.run()
+            if getter.client.count()<5:
+                getter.getProxies(XUN_DAI_LI_API)
+            else:
+                print("当前可用代理数目"+str(getter.client.count()))
             time.sleep(cycle)
+
+
     def schedule_api(self):
         app.run(API_HOST,API_PORT,debug=True)
 
@@ -36,3 +40,7 @@ class Scheduler():
         if API_ENABLED:
             api_process = Process(target=self.schedule_api)
             api_process.start()
+
+if __name__ == '__main__':
+    s = Scheduler()
+    s.run()

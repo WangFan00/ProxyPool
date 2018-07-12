@@ -7,9 +7,9 @@ REDIS_PASSWORD = None
 REDIS_KEY = 'proxies'
 
 #代理分数
-MAX_SCORE = 100
+MAX_SCORE = 5
 MIN_SCORE = 0
-INITIAL_SCORE = 10
+INITIAL_SCORE = 5
 
 VALID_STATUS_CODES = [200,302]
 
@@ -35,3 +35,5 @@ API_ENABLED = True
 
 #最大批次测试量
 BATCH_TEST_SIZE = 10
+
+XUN_DAI_LI_API="http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=956cf183afa242e9a73bcf6c9e8af3f0&orderno=YZ20187121252QWFUXQ&returnType=2&count=5"
