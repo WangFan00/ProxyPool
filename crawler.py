@@ -12,14 +12,7 @@ class Crawler(object):
         if response:
             j = json.loads(response.text)
             for item in j["RESULT"]:
-                proxy = item['ip']+":"+item['port']
+                proxy = str(item['ip'])+":"+str(item['port'])
                 self.client.add(REDIS_KEY,proxy)
                 print("成功获取到代理["+str(proxy)+"]")
-
-
-
-
-
-
-
 
