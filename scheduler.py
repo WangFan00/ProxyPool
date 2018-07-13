@@ -8,9 +8,6 @@ from db import RedisClient
 import time
 
 class Scheduler():
-    def __init__(self):
-        self.client = RedisClient()
-
     def scheduler_tester(self,cycle=TESTER_CYCLE):
         tester=Tester()
         while True:
@@ -19,6 +16,7 @@ class Scheduler():
             time.sleep(cycle)
 
     def schedule_getter(self,cycle=GETTER_CYCLE):
+        self.client = RedisClient()
         getter=Crawler()
         while True:
             if self.client.count()<5:

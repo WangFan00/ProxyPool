@@ -4,10 +4,8 @@ import requests
 from db import RedisClient
 
 class Crawler(object):
-    def __int__(self):
-        self.client = RedisClient()
-
     def getProxies(self,API):
+        self.client = RedisClient()
         response = requests.get(API)
         if response:
             j = json.loads(response.text)
