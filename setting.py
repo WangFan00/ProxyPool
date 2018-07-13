@@ -19,7 +19,7 @@ POOL_UPPER_THRESHOLD = 50000
 #检查周期
 TESTER_CYCLE = 20
 #获取周期
-GETTER_CYCLE = 300
+GETTER_CYCLE = 20
 
 #测试API
 TEST_URL = 'http://www.baidu.com'

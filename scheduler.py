@@ -4,9 +4,13 @@ from web_service import app
 from crawler import Crawler
 from tester import Tester
 from setting import TESTER_CYCLE,GETTER_CYCLE,TESTER_ENABLED,GETTER_ENABLED,API_ENABLED,API_HOST,API_PORT,XUN_DAI_LI_API
+from db import RedisClient
 import time
 
 class Scheduler():
+    def __init__(self):
+        self.client = RedisClient()
+
     def scheduler_tester(self,cycle=TESTER_CYCLE):
         tester=Tester()
         while True:
@@ -17,10 +21,10 @@ class Scheduler():
     def schedule_getter(self,cycle=GETTER_CYCLE):
         getter=Crawler()
         while True:
-            if getter.client.count()<5:
+            if self.client.count()<5:
                 getter.getProxies(XUN_DAI_LI_API)
             else:
-                print("当前可用代理数目"+str(getter.client.count()))
+                print("当前可用代理数目"+str(self.client.count()))
             time.sleep(cycle)
 
 
